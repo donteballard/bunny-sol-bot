@@ -1,0 +1,85 @@
+solana-trading-bot/
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+├── src/
+│   ├── config/
+│   │   ├── index.ts
+│   │   ├── database.config.ts
+│   │   └── solana.config.ts
+│   ├── core/
+│   │   ├── trading-engine/
+│   │   │   ├── index.ts
+│   │   │   ├── buy-strategy.ts
+│   │   │   └── sell-strategy.ts
+│   │   ├── price-monitoring/
+│   │   │   ├── index.ts
+│   │   │   └── price-tracker.ts
+│   │   └── notification/
+│   │       ├── index.ts
+│   │       └── notification-service.ts
+│   ├── database/
+│   │   ├── models/
+│   │   │   ├── token.model.ts
+│   │   │   ├── trade.model.ts
+│   │   │   ├── user-settings.model.ts
+│   │   │   ├── notification.model.ts
+│   │   │   └── performance-metrics.model.ts
+│   │   ├── migrations/
+│   │   └── seeds/
+│   ├── api/
+│   │   ├── routes/
+│   │   │   ├── token.routes.ts
+│   │   │   ├── trade.routes.ts
+│   │   │   ├── settings.routes.ts
+│   │   │   └── metrics.routes.ts
+│   │   ├── controllers/
+│   │   │   ├── token.controller.ts
+│   │   │   ├── trade.controller.ts
+│   │   │   ├── settings.controller.ts
+│   │   │   └── metrics.controller.ts
+│   │   └── middleware/
+│   │       ├── auth.middleware.ts
+│   │       └── validation.middleware.ts
+│   ├── services/
+│   │   ├── solana/
+│   │   │   ├── connection.service.ts
+│   │   │   └── wallet.service.ts
+│   │   ├── dex/
+│   │   │   ├── serum.service.ts
+│   │   │   └── raydium.service.ts
+│   │   └── analytics/
+│   │       └── performance.service.ts
+│   └── utils/
+│       ├── logger.ts
+│       ├── encryption.ts
+│       └── validators.ts
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── dashboard/
+│   │   │   ├── trading/
+│   │   │   └── settings/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── hooks/
+│   │   └── utils/
+│   ├── public/
+│   └── package.json
+├── tests/
+│   ├── unit/
+│   ├── integration/
+│   └── e2e/
+├── scripts/
+│   ├── setup.sh
+│   └── deploy.sh
+├── docs/
+│   ├── api/
+│   └── setup/
+├── .env.example
+├── .gitignore
+├── docker-compose.yml
+├── Dockerfile
+├── package.json
+├── tsconfig.json
+└── README.md 

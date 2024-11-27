@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Token {
+  id             String    @id @default(uuid())
+  symbol         String    @unique
+  name           String?
+  poolAddress    String
+  currentPrice   Decimal?  @db.Decimal(18,8)
+  priceUpdatedAt DateTime?
+  createdAt      DateTime  @default(now())
+  trades         Trade[]
+
+  @@map("tokens")
+}
+
+model Trade {
+  id          String    @id @default(uuid())
+  tokenId     String
+  tradeType   TradeType
+  quantity    Decimal   @db.Decimal(18,8)
+  price       Decimal   @db.Decimal(18,8)
+  profitLoss  Decimal?  @db.Decimal(18,8)
+  executedAt  DateTime  @default(now())
+  token       Token     @relation(fields: [tokenId], references: [id])
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+
+  @@map("trades")
+}
+
+model User {
+  id                String    @id @default(uuid())
+  email             String    @unique
+  profitThreshold   Decimal   @default(10.00) @db.Decimal(5,2)
+  lossThreshold     Decimal   @default(5.00) @db.Decimal(5,2)
+  holdingTimer      Int       @default(3600) // in seconds
+  slippageTolerance Decimal   @default(1.00) @db.Decimal(5,2)
+  trades            Trade[]
+  notifications     Notification[]
+  performanceMetrics PerformanceMetric[]
+
+  @@map("users")
+}
+
+model Notification {
+  id        String            @id @default(uuid())
+  userId    String
+  message   String
+  status    NotificationStatus @default(PENDING)
+  createdAt DateTime          @default(now())
+  user      User              @relation(fields: [userId], references: [id])
+
+  @@map("notifications")
+}
+
+model PerformanceMetric {
+  id               String   @id @default(uuid())
+  userId           String
+  totalTrades      Int      @default(0)
+  successfulTrades Int      @default(0)
+  failedTrades     Int      @default(0)
+  profitLossRatio  Decimal? @db.Decimal(10,4)
+  updatedAt        DateTime @default(now())
+  user             User     @relation(fields: [userId], references: [id])
+
+  @@map("performance_metrics")
+}
+
+enum TradeType {
+  BUY
+  SELL
+}
+
+enum NotificationStatus {
+  PENDING
+  SENT
+  FAILED
+} 

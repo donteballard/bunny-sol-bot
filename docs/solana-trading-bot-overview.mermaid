@@ -1,0 +1,18 @@
+graph TD
+    A["User Interface"]
+    B["Trading Engine"]
+    C["Price Monitoring Service"]
+    D["Notification Service"]
+    E["Data Storage"]
+    F["API Integration"]
+
+    A -->|"Configure settings"| B
+    A -->|"View performance"| E
+    B -->|"Execute trades"| F
+    B -->|"Log trades"| E
+    C -->|"Fetch prices"| F
+    C -->|"Trigger trades"| B
+    D -->|"Send alerts"| A
+    E -->|"Store data"| B
+    E -->|"Retrieve data"| A
+    F -->|"Interact with Solana"| G["Solana Blockchain"]
