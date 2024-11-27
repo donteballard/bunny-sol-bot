@@ -17,7 +17,7 @@ The Bunny Sol Bot automates trading activities for altcoins and meme coins built
 
 ## 🛠️ Tech Stack
 - **Backend**: Node.js with Express.js
-- **Frontend**: React.js with Material-UI
+- **Frontend**: Next.js with Material-UI
 - **Blockchain**: Solana-Web3.js
 - **Database**: PostgreSQL
 - **Monitoring**: Prometheus + Grafana
