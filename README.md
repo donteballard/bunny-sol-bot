@@ -71,7 +71,8 @@ The Bunny Sol Bot automates trading activities for altcoins and meme coins built
 - High availability design
 
 ## 📱 Screenshots
-[Coming Soon]
+![Bunny Sol Bot Dashboard](./assets/dashboard.png)
+*Main dashboard interface showing token balances and trading history*
 
 ## ⚠️ Disclaimer
 Trading cryptocurrencies carries significant risks. Users should carefully evaluate their trading strategies and risk tolerance.
