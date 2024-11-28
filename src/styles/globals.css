@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import './wallet-adapter.css';
  
 @layer base {
   :root {

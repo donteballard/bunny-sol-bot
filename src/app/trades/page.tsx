@@ -135,13 +135,31 @@ export default function TradesPage() {
     setSortConfig({ key, direction })
 
     const sortedTrades = [...trades].sort((a, b) => {
-      if (a[key] < b[key]) return direction === 'asc' ? -1 : 1
-      if (a[key] > b[key]) return direction === 'asc' ? 1 : -1
-      return 0
-    })
+      const aValue = a[key];
+      const bValue = b[key];
 
-    setTrades(sortedTrades)
-  }
+      // Handle null values
+      if (aValue === null && bValue === null) return 0;
+      if (aValue === null) return direction === 'asc' ? 1 : -1;
+      if (bValue === null) return direction === 'asc' ? -1 : 1;
+
+      // Handle dates
+      if (key === 'timestamp') {
+        const aDate = aValue as Date;
+        const bDate = bValue as Date;
+        return direction === 'asc' 
+          ? aDate.getTime() - bDate.getTime()
+          : bDate.getTime() - aDate.getTime();
+      }
+
+      // Handle other types
+      if (aValue < bValue) return direction === 'asc' ? -1 : 1;
+      if (aValue > bValue) return direction === 'asc' ? 1 : -1;
+      return 0;
+    });
+
+    setTrades(sortedTrades);
+  };
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => loadTrades(form.getValues(), currentPage)}>
